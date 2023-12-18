@@ -1,6 +1,7 @@
 #include "lib.h"
 #define vertical 13
 #define horizontal 15
+int p1[2];
 
 void Movement(int map[vertical][horizontal], int input)
 {
@@ -37,7 +38,7 @@ void printMap(int map[vertical][horizontal])
     {
         for (short int cont2 = 0; cont2 < horizontal; cont2++)
         {
-            printf("%c", map[cont][cont2]);
+            printf("%c ", map[cont][cont2]);
         }
         printf("\n");
     }
@@ -52,15 +53,17 @@ void buildMap(int map[vertical][horizontal])
         for (short int cont2 = 1; cont2 < (horizontal - 1); cont2++)
         {
             if (cont == 0 || cont == vertical - 1)
-                map[cont][cont2] = '-';
-            else if (cont2 % 2 == 0 && cont != 1 && cont != (vertical - 2))
+                map[cont][cont2] = '=';
+            else if (cont2 % 2 == 0 && cont % 2 == 0 && cont != 1 && cont != (vertical - 2))
                 map[cont][cont2] = '@';
             else
                 map[cont][cont2] = ' ';
         }
         map[cont][horizontal - 1] = '|';
     }
-    // map[]
+    map[1][1] = 'P';
+    p1[0] = 1;
+    p1[1] = 1;
 }
 
 void game()
@@ -69,8 +72,8 @@ void game()
     buildMap(map);
     for (;;)
     {
-        printMap(map);
         Input(map);
+        printMap(map);
         getchar();
         break;
     }
